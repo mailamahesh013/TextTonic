@@ -1,4 +1,3 @@
-// notes app script — single clean copy
 const NOTES_KEY = 'notesApp.notes';
 let notes = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
 const grid = document.getElementById('grid');
@@ -81,3 +80,4 @@ closeEditorBtn.addEventListener('click', closeEditor);
 cancelEditorBtn.addEventListener('click', closeEditor);
 searchInput.addEventListener('input', render);
 render();
+
