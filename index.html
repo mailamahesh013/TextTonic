@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TextTonic</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="branding">
+        <div class="logo">T</div>
+        <div class="title-block">
+          <h1 class="title">TextTonic</h1>
+          <p class="subtitle">Responsive notes with localStorage persistence</p>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="search">
+          <span class="search-icon">🔍</span>
+          <input id="searchInput" placeholder="Search notes..." aria-label="Search notes" />
+        </div>
+        <button id="newNoteBtn" class="btn primary">+ New Note</button>
+      </div>
+    </header>
+
+    <main class="notes-area">
+      <div id="grid" class="notes-grid">
+        <!-- Notes rendered by script.js -->
+      </div>
+      <div id="emptyState" class="empty-state">
+        <p>No notes yet — click 'New Note' to create one.</p>
+      </div>
+    </main>
+
+    <!-- Editor Modal -->
+    <div id="editorOverlay" class="editor-overlay">
+      <div class="editor-modal">
+        <div class="editor-header">
+          <input id="titleInput" class="title-input" placeholder="Title..." />
+          <div class="editor-meta">
+            <span id="dateTimeStamp"></span>
+            <button id="closeEditorBtn" class="close-btn">✕</button>
+          </div>
+        </div>
+        <textarea id="bodyInput" class="body-input" placeholder="Start typing your note..."></textarea>
+        <div class="editor-footer">
+          <button id="saveNoteBtn" class="btn primary">Save Note</button>
+          <button id="cancelEditorBtn" class="btn secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
