@@ -1,12 +1,10 @@
 // notes app script — single clean copy
 const NOTES_KEY = 'notesApp.notes';
 let notes = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
-
 const grid = document.getElementById('grid');
 const emptyState = document.getElementById('emptyState');
 const searchInput = document.getElementById('searchInput');
 const newNoteBtn = document.getElementById('newNoteBtn');
-
 const editorOverlay = document.getElementById('editorOverlay');
 const titleInput = document.getElementById('titleInput');
 const bodyInput = document.getElementById('bodyInput');
@@ -14,11 +12,8 @@ const dateTimeStamp = document.getElementById('dateTimeStamp');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
 const closeEditorBtn = document.getElementById('closeEditorBtn');
 const cancelEditorBtn = document.getElementById('cancelEditorBtn');
-
 let editingId = null;
-
 function saveNotes() { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); }
-
 function formatDateTime(ts = Date.now()) {
   const d = new Date(ts);
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -31,7 +26,6 @@ function formatDateTime(ts = Date.now()) {
   hours = hours % 12 || 12;
   return `${day} ${month} ${year} • ${hours}:${minutes} ${ampm}`;
 }
-
 function render() {
   const q = (searchInput.value || '').trim().toLowerCase();
   const visible = notes.filter(n => {
@@ -41,7 +35,6 @@ function render() {
   });
   renderNotes(visible);
 }
-
 function renderNotes(list) {
   grid.innerHTML = '';
   if (!list.length) { emptyState.style.display = 'block'; }
@@ -61,15 +54,12 @@ function renderNotes(list) {
     grid.appendChild(card);
   });
 }
-
 function createNote(title, content) {
   const now = Date.now();
   const note = { id: now, title: title || '', content: content || '', created: now, updated: now };
   notes.unshift(note); saveNotes(); render(); return note.id;
 }
-
 function deleteNote(id) { notes = notes.filter(n => n.id !== id); saveNotes(); render(); }
-
 function openEditor(id = null) {
   editingId = id;
   if (id) {
@@ -78,9 +68,7 @@ function openEditor(id = null) {
   } else { titleInput.value = ''; bodyInput.value = ''; dateTimeStamp.textContent = formatDateTime(); }
   editorOverlay.classList.add('active');
 }
-
 function closeEditor() { editingId = null; editorOverlay.classList.remove('active'); }
-
 newNoteBtn.addEventListener('click', () => openEditor());
 saveNoteBtn.addEventListener('click', () => {
   const title = titleInput.value.trim(); const content = bodyInput.value.trim();
@@ -89,9 +77,7 @@ saveNoteBtn.addEventListener('click', () => {
   } else { createNote(title, content); }
   saveNotes(); closeEditor(); render();
 });
-
 closeEditorBtn.addEventListener('click', closeEditor);
 cancelEditorBtn.addEventListener('click', closeEditor);
 searchInput.addEventListener('input', render);
-
 render();
